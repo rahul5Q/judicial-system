@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Judiciary Case Management</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Local stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="p-4 md:p-8">
+  <div class="max-w-7xl mx-auto">
+    <header class="text-center mb-10">
+      <h1 class="text-4xl font-extrabold text-gray-900">Judiciary Case Management Dashboard</h1>
+      <p class="text-gray-600 mt-2">Simple, non-AI system for tracking case records and hearing dates.</p>
+    </header>
+
+    <!-- Case Registration Form -->
+    <div class="container-card bg-white p-6 rounded-xl mb-10">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">Register New Case</h2>
+      <form id="caseForm" class="grid grid-cols-1 md:grid-cols-6 gap-4">
+        <input type="text" id="caseId" placeholder="Case ID (e.g., CIVIL-1234)" required
+               class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 md:col-span-2">
+
+        <input type="text" id="title" placeholder="Case Title/Description" required
+               class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 md:col-span-4">
+
+        <input type="text" id="parties" placeholder="Parties Involved (e.g., State v. Smith)" required
+               class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 md:col-span-3">
+
+        <select id="status" required
+                class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="" disabled selected>Select Status</option>
+          <option value="Filed">Filed</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Adjourned">Adjourned</option>
+          <option value="Closed">Closed</option>
+        </select>
+
+        <input type="date" id="hearingDate" required
+               class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <button type="submit"
+                class="btn-primary bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg md:col-span-1 hover:bg-blue-700 transition duration-150">
+          Register New Case
+        </button>
+      </form>
+    </div>
+
+    <!-- Case List -->
+    <div class="container-card bg-white p-6 rounded-xl">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-6 border-b pb-2">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4 md:mb-0">Case List</h2>
+        <input type="text" id="searchBar" placeholder="Search by Case ID, Title, or Parties..."
+               class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-1/3">
+      </div>
+
+      <div class="overflow-x-auto rounded-lg border border-gray-200">
+        <table class="min-w-full divide-y divide-gray-200" id="caseTable">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Title</th>
+              <th>Parties</th>
+              <th>Status</th>
+              <th>Hearing Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="caseListBody"></tbody>
+        </table>
+      </div>
+
+      <p id="noCasesMessage" class="text-center text-gray-500 mt-6 hidden">No cases currently registered in the system.</p>
+    </div>
+  </div>
+
+  <!-- Notification container (app.js will create it if needed) -->
+  <div id="appMessage" class="hidden"></div>
+
+  <!-- App script -->
+  <script src="app.js"></script>
+</body>
+</html>
